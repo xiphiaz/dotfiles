@@ -27,6 +27,7 @@ if [[ ! "${prompt_colors[@]}" ]]; then
     "36" # information color
     "37" # bracket color
     "31" # error color
+"32" #green
   )
 
   if [[ "$SSH_TTY" ]]; then
@@ -66,7 +67,7 @@ function prompt_git() {
   if [[ "$flags" ]]; then
     output="$output$c1:$c0$flags"
   fi
-  echo "$c1[$c0$output$c1]$c9"
+  echo "$c1[$c3$output$c1]$c9"
 }
 
 # hg status.
