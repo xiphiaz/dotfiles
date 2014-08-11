@@ -27,6 +27,9 @@ alias grr='git remote rm'
 alias gcl='git clone'
 alias gcd='git rev-parse 2>/dev/null && cd "./$(git rev-parse --show-cdup)"'
 
+# Current branch or SHA if detached.
+alias gbs='git branch | perl -ne '"'"'/^\* (?:\(detached from (.*)\)|(.*))/ && print "$1$2"'"'"''
+
 # Run commands in each subdirectory.
 alias gu-all='eachdir git pull'
 alias gp-all='eachdir git push'
@@ -62,6 +65,8 @@ function gurl() {
   local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
   echo "https://github.com/$user_repo"
 }
+# GitHub URL for current repo, including current branch + path.
+alias gurlp='echo $(gurl)/tree/$(gbs)/$(git rev-parse --show-prefix)'
 
 # git log with per-commit cmd-clickable GitHub URLs (iTerm)
 function gf() {
@@ -77,8 +82,10 @@ AWK
 function gfu() {
   local n="${@:-1}"
   n=$((n-1))
-  open $(git log -n 1 --skip=$n --pretty=oneline | awk "{printf \"$(gurl)/commit/%s\", substr(\$1,1,7)}")
+  git web--browse  $(git log -n 1 --skip=$n --pretty=oneline | awk "{printf \"$(gurl)/commit/%s\", substr(\$1,1,7)}")
 }
+# open current branch + path in GitHub, in the browser.
+alias gpu='git web--browse $(gurlp)'
 
 # Just the last few commits, please!
 for n in {1..5}; do alias gf$n="gf -n $n"; done
@@ -87,8 +94,5 @@ for n in {1..5}; do alias gf$n="gf -n $n"; done
 if [[ "$OSTYPE" =~ ^darwin ]]; then
   alias gdk='git ksdiff'
   alias gdkc='gdk --cached'
-  alias gt='gittower -s; gittower -s'
-  if [[ ! "$SSH_TTY" ]]; then
-    alias gd='gdk'
-  fi
+  alias gt='gittower "$(git rev-parse --show-toplevel)"'
 fi
