@@ -59,6 +59,7 @@ function prompt_git() {
   [[ "$output" ]] || output="$(git branch | perl -ne '/^\* (.*)/ && print $1')"
   flags="$(
     echo "$status" | awk 'BEGIN {r=""} \
+      /^Your branch is ahead of.*$/       {r=r "^"}\
       /^Changes to be committed:$/        {r=r "+"}\
       /^Changes not staged for commit:$/  {r=r "!"}\
       /^Untracked files:$/                {r=r "?"}\
