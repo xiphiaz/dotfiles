@@ -67,7 +67,7 @@ function prompt_git() {
   if [[ "$flags" ]]; then
     output="$output$c1:$c0$flags"
   fi
-  echo "$c3[$c3$output$c3]$c9"
+  echo "$c1[$c3$output$c1]$c9"
 }
 
 # hg status.
