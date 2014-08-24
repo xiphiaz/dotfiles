@@ -60,7 +60,7 @@ function prompt_git() {
   flags="$(
     echo "$status" | awk 'BEGIN {r=""} \
       /^Your branch is ahead of.*$/       {r=r "^"}\
-      /^You have unmerged paths\.$/       {r=r "merging"}\
+      /^You have unmerged paths\.$/       {r=r ">"}\
       /^Changes to be committed:$/        {r=r "+"}\
       /^Changes not staged for commit:$/  {r=r "!"}\
       /^Untracked files:$/                {r=r "?"}\
