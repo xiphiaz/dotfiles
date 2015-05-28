@@ -3,6 +3,7 @@ export DOTFILES=~/.dotfiles
 
 # Add binaries into the path
 PATH=$DOTFILES/bin:$PATH
+PATH=~/.composer/vendor/bin:$PATH
 export PATH
 
 # Source all files in "source"
