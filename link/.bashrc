@@ -24,3 +24,8 @@ function dotfiles() {
 }
 
 src
+
+export PATH="$PATH:$HOME/.rvm/bin" # Add RVM to PATH for scripting
+
+# added by travis gem
+[ -f /Users/zak/.travis/travis.sh ] && source /Users/zak/.travis/travis.sh

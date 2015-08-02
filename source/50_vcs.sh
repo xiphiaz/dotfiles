@@ -113,3 +113,10 @@ if is_osx; then
     fi
   }
 fi
+
+
+# git autocomplete
+if [ -f ./git-completion.bash ]; then
+      . ./git-completion.bash
+fi
+
