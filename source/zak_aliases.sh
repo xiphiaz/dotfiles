@@ -4,12 +4,11 @@
 
 alias httpmonitor="sudo tcpflow -p -c -i eth0 port 80 | grep -oE '(GET|POST|HEAD) .* HTTP/1.[01]|Host: .*'"
 
-alias fsstest="ssh testfss@202.4.230.204"
-
 alias myip="curl ipecho.net/plain ; echo"
 
 export JAVA_HOME=/usr
-PATH="$PATH:/home/zak/Applications/android-sdk-linux/tools"
+
+export NODE_PATH=$NODE_PATH:/Users/zak/.nave/installed/default/lib/node_modules
 
 alias a2r="sudo apachectl restart"
 alias a2s="sudo apachectl start"
